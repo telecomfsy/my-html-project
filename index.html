@@ -1,0 +1,1273 @@
+
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-ar="دليل العميل - TELECOMSY" data-en="Client Guide - TELECOMSY">دليل العميل - TELECOMSY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* General styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Cairo', sans-serif;
+      /* Advanced Animated Gradient Background */
+      background: linear-gradient(270deg, #1d2b64, #f8cdda, #6a11cb, #2575fc); /* More vibrant but still calm */
+      background-size: 400% 400%;
+      animation: gradientAnimation 20s ease infinite; /* Slower animation for calmness */
+      min-height: 100vh;
+      color: white;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative; /* For interactive background particles */
+    }
+
+    /* Animated Gradient Background */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Interactive Background Particles */
+    .bg-particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1; /* Behind other content */
+        pointer-events: none; /* Allows clicks to pass through */
+    }
+
+    .particle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.15); /* Slightly brighter particles */
+        border-radius: 50%;
+        animation: floatAndFade 25s infinite ease-in-out; /* Slower and longer animation */
+        filter: blur(2px); /* Soften particles */
+    }
+
+    @keyframes floatAndFade {
+        0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
+        25% { opacity: 0.8; }
+        50% { transform: translateY(-100vh) translateX(50vw) scale(1.2); opacity: 0.5; }
+        75% { opacity: 0.2; }
+        100% { transform: translateY(-200vh) translateX(100vw) scale(0.5); opacity: 0; }
+    }
+
+    /* Top Marquee Bar */
+    .top-marquee {
+      background: rgba(0, 0, 0, 0.7);
+      color: #ffd700;
+      padding: 8px 0;
+      font-size: 1.1rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      z-index: 100;
+      position: relative;
+    }
+    .top-marquee marquee {
+      display: block;
+      width: 100%;
+    }
+
+    /* Language Toggle Button */
+    .lang-toggle-container {
+      position: absolute;
+      top: 15px;
+      left: 15px; /* Position on the left for RTL, will adjust for LTR */
+      z-index: 101; /* Above marquee */
+    }
+    .lang-toggle-button {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 8px;
+      color: white;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    .lang-toggle-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+    /* Adjust for LTR */
+    html[dir="ltr"] .lang-toggle-container {
+      left: auto;
+      right: 15px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+      position: relative;
+    }
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #ffd700, #ff8c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.5);
+    }
+    header p {
+      font-size: 1.3rem;
+      color: #e0e0e0;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    /* Navigation Container */
+    .nav-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      z-index: 5;
+      position: relative;
+    }
+
+    /* Navigation Grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px;
+    }
+
+    /* Navigation Buttons */
+    .nav-button {
+      background: rgba(255, 255, 255, 0.15); /* Slightly more opaque for better glass effect */
+      border: 1px solid rgba(255, 255, 255, 0.3); /* Stronger border for glass effect */
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 600;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+      backdrop-filter: blur(10px); /* Increased blur for more prominent glass effect */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      min-height: 180px;
+      opacity: 0; /* For load animation */
+      transform: translateY(30px); /* For load animation */
+      position: relative; /* For ripple effect */
+      overflow: hidden; /* Hide ripple outside */
+    }
+
+    .nav-button:hover {
+      background: rgba(255, 255, 255, 0.25); /* More opaque on hover */
+      transform: translateY(-10px) scale(1.03); /* More pronounced lift and scale */
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+      border-color: #ffd700;
+    }
+
+    .nav-button i {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #ffd700;
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .nav-button:hover i {
+      transform: scale(1.15) rotate(5deg); /* More dynamic icon interaction */
+      color: #ff8c00;
+    }
+
+    /* Ripple Effect for Buttons */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7); /* Brighter ripple */
+      animation: rippleEffect 0.6s linear forwards;
+      opacity: 0;
+      transform: scale(0);
+      pointer-events: none;
+      z-index: 1; /* Ensure ripple is above button background */
+    }
+
+    @keyframes rippleEffect {
+      0% {
+        transform: scale(0);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(2); /* Increased scale for wider spread */
+        opacity: 0;
+      }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 1.1rem;
+      color: #aaa;
+      border-top: 1px solid #444;
+      margin-top: auto;
+      background: rgba(0,0,0,0.2);
+      z-index: 10;
+      position: relative;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.85); /* Slightly darker overlay */
+      backdrop-filter: blur(8px); /* Stronger blur for modal background */
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      /* Added linear gradient for internal modal background */
+      background: linear-gradient(135deg, #2a2a2a, #4a4a4a); /* Default gradient */
+      margin: auto;
+      padding: 30px;
+      border: 1px solid #888;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+      animation: modalOpen 0.4s ease-out;
+      text-align: center;
+    }
+
+    /* Specific gradients for modals */
+    #about-us-modal .modal-content {
+      background: linear-gradient(135deg, #1e3c72, #2a5298); /* Deep Blue */
+    }
+    #services-modal .modal-content {
+      background: linear-gradient(135deg, #4CAF50, #8BC34A); /* Green Shades */
+    }
+    #packages-modal .modal-content {
+      background: linear-gradient(135deg, #FF5722, #FFC107); /* Orange/Amber */
+    }
+    #dashboard-modal .modal-content {
+      background: linear-gradient(135deg, #673AB7, #9C27B0); /* Purple Shades */
+    }
+    #faq-modal .modal-content {
+      background: linear-gradient(135deg, #009688, #4DB6AC); /* Teal Shades */
+    }
+    #contact-modal .modal-content {
+      background: linear-gradient(135deg, #E91E63, #F06292); /* Pink Shades */
+    }
+    #terms-modal .modal-content {
+      background: linear-gradient(135deg, #3F51B5, #7986CB); /* Indigo Shades */
+    }
+
+    @keyframes modalOpen {
+      from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-content h2 {
+      font-size: 2.5rem;
+      color: #ffd700;
+      margin-bottom: 15px;
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      padding-bottom: 10px;
+    }
+
+    .modal-content h3 {
+        font-size: 1.8rem;
+        color: #7aff7a;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        text-align: center;
+        border-bottom: 1px dashed rgba(255,255,255,0.1);
+        padding-bottom: 8px;
+    }
+
+    .modal-content p, .modal-content ul {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      line-height: 1.7;
+      text-align: justify;
+      margin-bottom: 10px;
+    }
+
+    .modal-content ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
+    }
+
+    .modal-content ul li {
+        background: rgba(255, 255, 255, 0.08); /* Slightly brighter list items */
+        padding: 12px 18px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        border-right: 4px solid #ffd700;
+        transition: background 0.3s ease, transform 0.3s ease;
+        display: flex; /* Align icon with text */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .modal-content ul li i {
+      color: #ffd700; /* Icon color for list items */
+      font-size: 1.2em;
+    }
+
+    .modal-content ul li:hover {
+        background: rgba(255, 255, 255, 0.15); /* More prominent hover */
+        transform: translateX(8px); /* More pronounced shift on hover */
+    }
+
+    .modal-content .price-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+        text-align: right;
+    }
+
+    .modal-content .price-item {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .modal-content .price-item:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .modal-content .price-item h4 {
+        color: #ffd700;
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+    }
+
+    .modal-content .price-item .price {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #7aff7a;
+        margin-bottom: 5px;
+    }
+
+    .modal-content .price-item p {
+        font-size: 0.95rem;
+        color: #ccc;
+        text-align: center;
+    }
+
+    .modal-content .special-offer {
+        background: linear-gradient(90deg, #ff6b6b, #ee4c7a);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 25px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-align: center;
+        border: 2px dashed rgba(255,255,255,0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .modal-content .special-offer:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .modal-content .special-offer span {
+        display: block;
+        font-size: 1.8rem;
+        margin-top: 10px;
+        color: #fff;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    }
+    .modal-content .special-offer small {
+        display: block;
+        font-size: 0.9rem;
+        margin-top: 5px;
+        color: rgba(255,255,255,0.8);
+    }
+
+    .modal-content .link-button {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .modal-content .link-button:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    .close-button {
+      color: #aaa;
+      font-size: 2.5rem;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    html[dir="ltr"] .close-button {
+      right: auto;
+      left: 20px;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+      color: #f00;
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    /* Chart styles inside modal */
+    .chart-container {
+      position: relative;
+      height: 400px; /* Fixed height for charts */
+      width: 100%;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 992px) {
+      header h1 {
+        font-size: 3rem;
+      }
+      header p {
+        font-size: 1.2rem;
+      }
+      .nav-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
+      .nav-button {
+        font-size: 1.6rem;
+        padding: 25px;
+        min-height: 160px;
+      }
+      .nav-button i {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+      }
+      .modal-content {
+        max-width: 600px;
+      }
+      .chart-container {
+        height: 350px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-marquee {
+        font-size: 1rem;
+        padding: 6px 0;
+      }
+      .lang-toggle-container {
+        top: 10px;
+        left: 10px;
+      }
+      html[dir="ltr"] .lang-toggle-container {
+        right: 10px;
+      }
+      .lang-toggle-button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+      header {
+        padding: 30px 15px;
+      }
+      header h1 {
+        font-size: 2.5rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .nav-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+      .nav-button {
+        font-size: 1.4rem;
+        padding: 20px;
+        min-height: 140px;
+      }
+      .nav-button i {
+        font-size: 3rem;
+        margin-bottom: 10px;
+      }
+      footer {
+        padding: 20px;
+        font-size: 1rem;
+      }
+      .modal-content {
+        padding: 20px;
+        width: 95%;
+      }
+      .modal-content h2 {
+        font-size: 2rem;
+      }
+      .modal-content h3 {
+        font-size: 1.5rem;
+      }
+      .modal-content p, .modal-content ul, .modal-content ul li {
+        font-size: 1rem;
+      }
+      .modal-content .price-item h4 {
+        font-size: 1.2rem;
+      }
+      .modal-content .price-item .price {
+        font-size: 1.4rem;
+      }
+      .modal-content .special-offer {
+        font-size: 1rem;
+        padding: 15px;
+      }
+      .modal-content .special-offer span {
+        font-size: 1.5rem;
+      }
+      .close-button {
+        font-size: 2rem;
+        top: 5px;
+        right: 15px;
+      }
+      html[dir="ltr"] .close-button {
+        left: 15px;
+      }
+      .chart-container {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-marquee {
+        font-size: 0.9rem;
+        padding: 5px 0;
+      }
+      .lang-toggle-container {
+        top: 5px;
+        left: 5px;
+      }
+      html[dir="ltr"] .lang-toggle-container {
+        right: 5px;
+      }
+      .lang-toggle-button {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+      }
+      header {
+        padding: 20px 10px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      header p {
+        font-size: 0.9rem;
+      }
+      .nav-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .nav-button {
+        font-size: 1.2rem;
+        padding: 15px;
+        min-height: 120px;
+      }
+      .nav-button i {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+      }
+      .modal-content {
+        padding: 15px;
+      }
+      .modal-content h2 {
+        font-size: 1.8rem;
+      }
+      .modal-content h3 {
+        font-size: 1.3rem;
+      }
+      .modal-content p, .modal-content ul, .modal-content ul li {
+        font-size: 0.9rem;
+      }
+      .modal-content .price-list {
+        grid-template-columns: 1fr;
+      }
+      .modal-content .special-offer {
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+      .modal-content .special-offer span {
+        font-size: 1.3rem;
+      }
+      .chart-container {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-particles" id="bgParticles"></div>
+
+  <div class="top-marquee">
+    <marquee id="mainMarquee" behavior="scroll" direction="right" scrollamount="5" data-ar="أهلاً بكم في اتصالات سوريا، رفيقكم الرقمي للاتصال الأمثل!" data-en="Welcome to Syria Telecom, your digital companion for optimal connectivity!">
+      أهلاً بكم في اتصالات سوريا، رفيقكم الرقمي للاتصال الأمثل!
+    </marquee>
+  </div>
+
+  <div class="lang-toggle-container">
+    <button class="lang-toggle-button" id="langToggleBtn" data-current-lang="ar">English</button>
+  </div>
+
+  <header>
+    <h1 data-ar="دليل العميل" data-en="Client Guide">دليل العميل</h1>
+    <p data-ar="كل ما تحتاج معرفته عن خدماتنا" data-en="Everything you need to know about our services">كل ما تحتاج معرفته عن خدماتنا</p>
+  </header>
+
+  <main class="nav-container">
+    <div class="nav-grid">
+      <a href="#about-us-modal" class="nav-button">
+        <i class="fas fa-info-circle"></i>
+        <span data-ar="من نحن" data-en="About Us">من نحن</span>
+      </a>
+      <a href="#services-modal" class="nav-button">
+        <i class="fas fa-tools"></i>
+        <span data-ar="خدماتنا" data-en="Our Services">خدماتنا</span>
+      </a>
+      <a href="#packages-modal" class="nav-button">
+        <i class="fas fa-box-open"></i>
+        <span data-ar="العروض والباقات" data-en="Offers & Packages">العروض والباقات</span>
+      </a>
+      <a href="#dashboard-modal" class="nav-button">
+        <i class="fas fa-chart-bar"></i>
+        <span data-ar="لوحة المعلومات" data-en="Dashboard">لوحة المعلومات</span>
+      </a>
+      <a href="#faq-modal" class="nav-button">
+        <i class="fas fa-question-circle"></i>
+        <span data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</span>
+      </a>
+      <a href="#contact-modal" class="nav-button">
+        <i class="fas fa-envelope"></i>
+        <span data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span>
+      </a>
+      <a href="#terms-modal" class="nav-button">
+        <i class="fas fa-file-contract"></i>
+        <span data-ar="الشروط والأحكام" data-en="Terms & Conditions">الشروط والأحكام</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p data-ar="&copy; 2025 TELECOMSY | جميع الحقوق محفوظة." data-en="&copy; 2025 TELECOMSY | All rights reserved.">&copy; 2025 TELECOMSY | جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <div id="about-us-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('about-us-modal')">&times;</span>
+      <h2 data-ar="من نحن" data-en="About Us">من نحن</h2>
+      <p data-ar="نحن شركة رائدة ومتخصصة في مجال الاتصالات السلكية واللاسلكية، نعمل بشغف وتفاني لتقديم أفضل الحلول التقنية المتاحة." data-en="We are a leading company specializing in wired and wireless communications, working with passion and dedication to provide the best available technical solutions.">نحن شركة رائدة ومتخصصة في مجال الاتصالات السلكية واللاسلكية، نعمل بشغف وتفاني لتقديم أفضل الحلول التقنية المتاحة.</p>
+      <p data-ar="رسالتنا هي مواكبة أحدث التقنيات في العالم الرقمي وتطبيقها محلياً لضمان تقديم خدمات عالية الجودة تلبي تطلعات عملائنا وتفوق توقعاتهم." data-en="Our mission is to keep pace with the latest technologies in the digital world and apply them locally to ensure the provision of high-quality services that meet and exceed our customers' expectations.">رسالتنا هي مواكبة أحدث التقنيات في العالم الرقمي وتطبيقها محلياً لضمان تقديم خدمات عالية الجودة تلبي تطلعات عملائنا وتفوق توقعاتهم.</p>
+      <p data-ar="نلتزم بتوفير اتصال آمن ومستدام لأهلنا في المناطق المحررة، مع التركيز على الابتكار والتطوير المستمر لخدماتنا." data-en="We are committed to providing secure and sustainable connectivity for our people in the liberated areas, focusing on continuous innovation and development of our services.">نلتزم بتوفير اتصال آمن ومستدام لأهلنا في المناطق المحررة، مع التركيز على الابتكار والتطوير المستمر لخدماتنا.</p>
+      <h3 data-ar="🎯 رؤيتنا" data-en="🎯 Our Vision">🎯 رؤيتنا</h3>
+      <p data-ar="أن نكون الخيار الأول في مجال الاتصالات، ونساهم في بناء مستقبل رقمي مزدهر لمجتمعنا" data-en="To be the first choice in telecommunications, and contribute to building a prosperous digital future for our society">أن نكون الخيار الأول في مجال الاتصالات، ونساهم في بناء مستقبل رقمي مزدهر لمجتمعنا</p>
+    </div>
+  </div>
+
+  <div id="services-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('services-modal')">&times;</span>
+      <h2 data-ar="خدماتنا المتميزة" data-en="Our Distinguished Services">خدماتنا المتميزة</h2>
+      <h3 data-ar="📞 خدمات الهاتف الأرضي" data-en="📞 Landline Services">📞 خدمات الهاتف الأرضي</h3>
+      <ul>
+        <li data-ar-text="متوفر على مدار الساعة - خدمة مستمرة بلا انقطاع" data-en-text="Available 24/7 - Continuous, uninterrupted service"><i class="fas fa-clock"></i> <span class="translatable-text">متوفر على مدار الساعة - خدمة مستمرة بلا انقطاع</span></li>
+        <li data-ar-text="اشتراك مجاني مع كل خط ADSL جديد" data-en-text="Free subscription with every new ADSL line"><i class="fas fa-wifi"></i> <span class="translatable-text">اشتراك مجاني مع كل خط ADSL جديد</span></li>
+        <li data-ar-text="وصول مباشر للطوارئ - اتصال فوري بالشرطة، الإسعاف، والدفاع المدني" data-en-text="Direct access to emergencies - Immediate contact with police, ambulance, and civil defense"><i class="fas fa-exclamation-triangle"></i> <span class="translatable-text">وصول مباشر للطوارئ - اتصال فوري بالشرطة، الإسعاف، والدفاع المدني</span></li>
+        <li data-ar-text="ربط شامل بين جميع المحافظات والبلدات" data-en-text="Comprehensive linkage between all provinces and towns"><i class="fas fa-globe-americas"></i> <span class="translatable-text">ربط شامل بين جميع المحافظات والبلدات</span></li>
+        <li data-ar-text="تركيب مجاني + خدمة عملاء 24/7" data-en-text="Free installation + 24/7 customer service"><i class="fas fa-wrench"></i> <span class="translatable-text">تركيب مجاني + خدمة عملاء 24/7</span></li>
+      </ul>
+      <h3 data-ar="🌐 خدمات ADSL" data-en="🌐 ADSL Services">🌐 خدمات ADSL</h3>
+      <p data-ar-text="تقنية الإنترنت عبر الخط الهاتفي المطورة، مصممة خصيصاً للاستخدام المنزلي اليومي. توفر اتصالاً مستقراً وموثوقاً لجميع احتياجاتك الرقمية."><i class="fas fa-ethernet"></i> <span class="translatable-text">تقنية الإنترنت عبر الخط الهاتفي المطورة، مصممة خصيصاً للاستخدام المنزلي اليومي. توفر اتصالاً مستقراً وموثوقاً لجميع احتياجاتك الرقمية.</span></p>
+      <h3 data-ar="🚀 إنترنت الألياف الضوئية FTTH" data-en="🚀 FTTH Fiber Optic Internet">🚀 إنترنت الألياف الضوئية FTTH</h3>
+      <ul>
+        <li data-ar-text="سرعات عالية فائقة - تجربة إنترنت لا مثيل لها" data-en-text="Ultra-high speeds - An unparalleled internet experience"><i class="fas fa-tachometer-alt"></i> <span class="translatable-text">سرعات عالية فائقة - تجربة إنترنت لا مثيل لها</span></li>
+        <li data-ar-text="استقرار وثبات تام في جودة الخدمة" data-en-text="Complete stability and consistency in service quality"><i class="fas fa-check-circle"></i> <span class="translatable-text">استقرار وثبات تام في جودة الخدمة</span></li>
+        <li data-ar-text="تقنية المستقبل - استثمار في الغد الرقمي" data-en-text="Future technology - An investment in the digital tomorrow"><i class="fas fa-lightbulb"></i> <span class="translatable-text">تقنية المستقبل - استثمار في الغد الرقمي</span></li>
+        <li data-ar-text="أداء متسق في جميع الأوقات" data-en-text="Consistent performance at all times"><i class="fas fa-chart-line"></i> <span class="translatable-text">أداء متسق في جميع الأوقات</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="packages-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('packages-modal')">&times;</span>
+      <h2 data-ar="العروض والباقات الحصرية" data-en="Exclusive Offers & Packages">العروض والباقات الحصرية</h2>
+
+      <h3 data-ar="📶 باقات السرعة الثابتة (شهريًا)" data-en="📶 Fixed Speed Packages (Monthly)">📶 باقات السرعة الثابتة (شهريًا)</h3>
+      <div class="price-list">
+        <div class="price-item">
+          <h4 data-ar="باقة 2 ميجا" data-en="2 Mbps Package">باقة 2 ميجا</h4>
+          <div class="price" data-ar="6$" data-en="6$">6$</div>
+          <p data-ar="مناسبة للاستخدام الأساسي" data-en="Suitable for basic use">مناسبة للاستخدام الأساسي</p>
+        </div>
+        <div class="price-item">
+          <h4 data-ar="باقة 3 ميجا" data-en="3 Mbps Package">باقة 3 ميجا</h4>
+          <div class="price" data-ar="7.5$" data-en="7.5$">7.5$</div>
+          <p data-ar="مثالية للعائلات الصغيرة" data-en="Ideal for small families">مثالية للعائلات الصغيرة</p>
+        </div>
+        <div class="price-item">
+          <h4 data-ar="باقة 4 ميجا" data-en="4 Mbps Package">باقة 4 ميجا</h4>
+          <div class="price" data-ar="9$" data-en="9$">9$</div>
+          <p data-ar="سرعة متوسطة موثوقة" data-en="Reliable medium speed">سرعة متوسطة موثوقة</p>
+        </div>
+        <div class="price-item">
+          <h4 data-ar="باقة 6 ميجا" data-en="6 Mbps Package">باقة 6 ميجا</h4>
+          <div class="price" data-ar="12$" data-en="12$">12$</div>
+          <p data-ar="أداء عالي للمنازل" data-en="High performance for homes">أداء عالي للمنازل</p>
+        </div>
+        <div class="price-item">
+          <h4 data-ar="باقة 8 ميجا" data-en="8 Mbps Package">باقة 8 ميجا</h4>
+          <div class="price" data-ar="15$" data-en="15$">15$</div>
+          <p data-ar="سرعة فائقة للجميع" data-en="Super speed for everyone">سرعة فائقة للجميع</p>
+        </div>
+      </div>
+
+      <div class="special-offer">
+        <span data-ar="عرض خاص حصري!" data-en="Exclusive Special Offer!">عرض خاص حصري!</span>
+        <span data-ar="باقة 8 ميجا بسعر 10$ فقط" data-en="8 Mbps package for only 10$">باقة 8 ميجا بسعر 10$ فقط</span>
+        <small data-ar="مخصصة للمحال التجارية، المدارس، والمنشآت الصناعية" data-en="Dedicated for commercial shops, schools, and industrial facilities">مخصصة للمحال التجارية، المدارس، والمنشآت الصناعية</small>
+      </div>
+
+      <h3 data-ar="🌐 باقات الاستهلاك المرنة" data-en="🌐 Flexible Consumption Packages">🌐 باقات الاستهلاك المرنة</h3>
+      <ul>
+        <li data-ar-text="200 جيجا: 6$ - مثالية للاستخدام الخفيف" data-en-text="200 GB: 6$ - Ideal for light use">200 جيجا: 6$ - مثالية للاستخدام الخفيف</li>
+        <li data-ar-text="300 جيجا: 9$ - توازن مثالي بين السعر والكمية" data-en-text="300 GB: 9$ - Perfect balance between price and quantity">300 جيجا: 9$ - توازن مثالي بين السعر والكمية</li>
+        <li data-ar-text="500 جيجا: 12$ - للعائلات النشطة رقمياً" data-en-text="500 GB: 12$ - For digitally active families">500 جيجا: 12$ - للعائلات النشطة رقمياً</li>
+        <li data-ar-text="1000 جيجا: 18$ - حرية كاملة في التصفح" data-en-text="1000 GB: 18$ - Full Browse freedom">1000 جيجا: 18$ - حرية كاملة في التصفح</li>
+      </ul>
+
+      <h3 data-ar="💡 باقة التوفير الذكية" data-en="💡 Smart Saving Package">💡 باقة التوفير الذكية</h3>
+      <div class="price-item">
+        <h4 data-ar="باقة التوفير" data-en="Saving Package">باقة التوفير</h4>
+        <div class="price" data-ar="6$" data-en="6$">6$</div>
+        <p data-ar="50 جيجا بسرعة 3 ميجا" data-en="50 GB at 3 Mbps speed">50 جيجا بسرعة 3 ميجا</p>
+        <p data-ar="الخيار الأمثل للمستخدمين المقتصدين،،،" data-en="The optimal choice for economical users,...">الخيار الأمثل للمستخدمين المقتصدين،،،</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="dashboard-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('dashboard-modal')">&times;</span>
+      <h2 data-ar="لوحة المعلومات" data-en="Dashboard">لوحة المعلومات</h2>
+
+      <h3 data-ar="استخدامات سرعات الإنترنت (تقديري)" data-en="Internet Speed Uses (Estimated)">استخدامات سرعات الإنترنت (تقديري)</h3>
+      <div class="chart-container">
+        <canvas id="speedUsageChart"></canvas>
+      </div>
+
+      <h3 data-ar="مقارنة بين الكبل الضوئي والكبل العادي" data-en="Fiber Optic vs. Regular Cable Comparison">مقارنة بين الكبل الضوئي والكبل العادي</h3>
+      <div class="chart-container">
+        <canvas id="cableComparisonChart"></canvas>
+      </div>
+
+      <p data-ar="هذه الرسوم البيانية تقدم لمحة عامة عن استخدامات السرعات والفروقات بين أنواع الكبلات." data-en="These charts provide an overview of speed usages and differences between cable types.">هذه الرسوم البيانية تقدم لمحة عامة عن استخدامات السرعات والفروقات بين أنواع الكبلات.</p>
+    </div>
+  </div>
+
+  <div id="faq-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('faq-modal')">&times;</span>
+      <h2 data-ar="الأسئلة الشائعة" data-en="Frequently Asked Questions">الأسئلة الشائعة</h2>
+      <h3 data-ar-text="ما هي سرعة الإنترنت التي أحتاجها؟"><i class="fas fa-question-circle"></i> <span class="translatable-text">ما هي سرعة الإنترنت التي أحتاجها؟</span></h3>
+      <p data-ar="تعتمد السرعة المطلوبة على استخدامك. للاستخدام الأساسي (التصفح والبريد الإلكتروني)، تكفي باقة 2-3 ميجا. للعائلات الكبيرة أو استخدام الوسائط المتعددة، ننصح بباقات 6-8 ميجا أو الألياف الضوئية." data-en="The required speed depends on your usage. For basic use (Browse and email), a 2-3 Mbps package is sufficient. For large families or multimedia use, we recommend 6-8 Mbps packages or fiber optics.">تعتمد السرعة المطلوبة على استخدامك. للاستخدام الأساسي (التصفح والبريد الإلكتروني)، تكفي باقة 2-3 ميجا. للعائلات الكبيرة أو استخدام الوسائط المتعددة، ننصح بباقات 6-8 ميجا أو الألياف الضوئية.</p>
+
+      <h3 data-ar-text="كيف يمكنني الاشتراك في خدماتكم؟"><i class="fas fa-question-circle"></i> <span class="translatable-text">كيف يمكنني الاشتراك في خدماتكم؟</span></h3>
+      <p data-ar="يمكنك الاشتراك عن طريق زيارة أحد مكاتبنا، أو التواصل مع فريق المبيعات عبر الهاتف أو الواتساب المذكورين في قسم &quot;تواصل معنا&quot;." data-en="You can subscribe by visiting one of our offices, or by contacting our sales team via phone or WhatsApp mentioned in the &quot;Contact Us&quot; section.">يمكنك الاشتراك عن طريق زيارة أحد مكاتبنا، أو التواصل مع فريق المبيعات عبر الهاتف أو الواتساب المذكورين في قسم "تواصل معنا".</p>
+
+      <h3 data-ar-text="هل تقدمون خدمة التركيب المجاني؟"><i class="fas fa-question-circle"></i> <span class="translatable-text">هل تقدمون خدمة التركيب المجاني؟</span></h3>
+      <p data-ar="نعم، نقدم خدمة التركيب المجاني لخدمات الهاتف الأرضي وADSL الجديدة." data-en="Yes, we offer free installation service for new landline and ADSL services.">نعم، نقدم خدمة التركيب المجاني لخدمات الهاتف الأرضي وADSL الجديدة.</p>
+
+      <h3 data-ar-text="ماذا أفعل إذا واجهت مشكلة في الاتصال؟"><i class="fas fa-question-circle"></i> <span class="translatable-text">ماذا أفعل إذا واجهت مشكلة في الاتصال؟</span></h3>
+      <p data-ar="يرجى التواصل فوراً مع فريق الدعم الفني لدينا على مدار الساعة عبر الهاتف أو واتساب، وسيقومون بتقديم المساعدة اللازمة." data-en="Please contact our 24/7 technical support team immediately via phone or WhatsApp, and they will provide the necessary assistance.">يرجى التواصل فوراً مع فريق الدعم الفني لدينا على مدار الساعة عبر الهاتف أو واتساب، وسيقومون بتقديم المساعدة اللازمة.</p>
+
+      <h3 data-ar-text="هل يمكنني ترقية باقتي الحالية؟"><i class="fas fa-question-circle"></i> <span class="translatable-text">هل يمكنني ترقية باقتي الحالية؟</span></h3>
+      <p data-ar="نعم، يمكنك ترقية باقتك في أي وقت عن طريق التواصل مع خدمة العملاء." data-en="Yes, you can upgrade your package at any time by contacting customer service.">نعم، يمكنك ترقية باقتك في أي وقت عن طريق التواصل مع خدمة العملاء.</p>
+    </div>
+  </div>
+
+  <div id="contact-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('contact-modal')">&times;</span>
+      <h2 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h2>
+      <p data-ar="نحن هنا لخدمتكم ومساعدتكم في أي وقت. تواصلوا معنا عبر قنواتنا الرسمية:" data-en="We are here to serve and assist you at any time. Contact us through our official channels:">نحن هنا لخدمتكم ومساعدتكم في أي وقت. تواصلوا معنا عبر قنواتنا الرسمية:</p>
+      <ul>
+        <li>
+          <i class="fab fa-facebook"></i> <span data-ar="فيسبوك:" data-en="Facebook:">فيسبوك:</span>
+          <a href="https://www.facebook.com/profile.php?id=61554692406298&rdid=BtwKAOQYXkocmEks&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1JSAgFDp1t%2F#" class="link-button" target="_blank" data-ar="صفحتنا على فيسبوك" data-en="Our Facebook Page">صفحتنا على فيسبوك</a>
+        </li>
+        <li>
+          <i class="fab fa-telegram-plane"></i> <span data-ar="تيلغرام:" data-en="Telegram:">تيلغرام:</span>
+          <a href="https://t.me/telecom_sy" class="link-button" target="_blank" data-ar="قناتنا على تيلغرام" data-en="Our Telegram Channel">قناتنا على تيلغرام</a>
+        </li>
+      </ul>
+      <h3 data-ar="خدمة العملاء" data-en="Customer Service">خدمة العملاء</h3>
+      <p data-ar="فريق دعم فني متخصص متاح على مدار الساعة لمساعدتكم وحل جميع استفساراتكم" data-en="A specialized technical support team is available 24/7 to assist you and resolve all your inquiries">فريق دعم فني متخصص متاح على مدار الساعة لمساعدتكم وحل جميع استفساراتكم</p>
+      <p data-ar="نحن في خدمتكم دائماً!" data-en="We are in your service always!">نحن في خدمتكم دائماً!</p>
+    </div>
+  </div>
+
+  <div id="terms-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('terms-modal')">&times;</span>
+      <h2 data-ar="الشروط والأحكام" data-en="Terms & Conditions">الشروط والأحكام</h2>
+      <p data-ar="أهلاً بكم في خدمات TELECOMSY. يرجى قراءة الشروط والأحكام التالية بعناية قبل استخدام خدماتنا." data-en="Welcome to TELECOMSY services. Please read the following terms and conditions carefully before using our services.">أهلاً بكم في خدمات TELECOMSY. يرجى قراءة الشروط والأحكام التالية بعناية قبل استخدام خدماتنا.</p>
+      <h3 data-ar-text="1. نطاق الخدمة"><i class="fas fa-file-alt"></i> <span class="translatable-text">1. نطاق الخدمة</span></h3>
+      <p data-ar="تقدم TELECOMSY خدمات الاتصالات والإنترنت (ADSL، الألياف الضوئية، الهاتف الأرضي) في المناطق المحددة والمحررة. تخضع جودة الخدمة للتغطية التقنية والبنية التحتية المتاحة." data-en="TELECOMSY provides telecommunications and internet services (ADSL, fiber optic, landline) in specified and liberated areas. Service quality is subject to technical coverage and available infrastructure.">تقدم TELECOMSY خدمات الاتصالات والإنترنت (ADSL، الألياف الضوئية، الهاتف الأرضي) في المناطق المحددة والمحررة. تخضع جودة الخدمة للتغطية التقنية والبنية التحتية المتاحة.</p>
+      <h3 data-ar-text="2. الاشتراك والدفع"><i class="fas fa-money-check-alt"></i> <span class="translatable-text">2. الاشتراك والدفع</span></h3>
+      <p data-ar="يتعهد العميل بدفع رسوم الاشتراك الشهرية أو رسوم الباقات المتفق عليها في المواعيد المحددة. في حال التأخر عن الدفع، يحق للشركة تعليق أو قطع الخدمة بعد إشعار العميل." data-en="The customer agrees to pay the monthly subscription fees or agreed-upon package fees on time. In case of delayed payment, the company has the right to suspend or cut off service after notifying the customer.">يتعهد العميل بدفع رسوم الاشتراك الشهرية أو رسوم الباقات المتفق عليها في المواعيد المحددة. في حال التأخر عن الدفع، يحق للشركة تعليق أو قطع الخدمة بعد إشعار العميل.</p>
+      <h3 data-ar-text="3. الاستخدام العادل"><i class="fas fa-handshake"></i> <span class="translatable-text">3. الاستخدام العادل</span></h3>
+      <p data-ar="يجب على العميل استخدام الخدمة بطريقة قانونية ومسؤولة، وعدم استخدامها في أي أنشطة غير قانونية أو ضارة أو تخل بأمن الشبكة أو حقوق الآخرين." data-en="The customer must use the service in a legal and responsible manner, and not use it for any illegal or harmful activities or activities that violate network security or the rights of others.">يجب على العميل استخدام الخدمة بطريقة قانونية ومسؤولة، وعدم استخدامها في أي أنشطة غير قانونية أو ضارة أو تخل بأمن الشبكة أو حقوق الآخرين.</p>
+      <h3 data-ar-text="4. الدعم الفني"><i class="fas fa-headset"></i> <span class="translatable-text">4. الدعم الفني</span></h3>
+      <p data-ar="توفر الشركة دعماً فنياً على مدار الساعة للمساعدة في حل المشكلات التقنية المتعلقة بالخدمة." data-en="The company provides 24/7 technical support to assist in resolving technical issues related to the service.">توفر الشركة دعماً فنياً على مدار الساعة للمساعدة في حل المشكلات التقنية المتعلقة بالخدمة.</p>
+      <h3 data-ar-text="5. إنهاء الخدمة"><i class="fas fa-times-circle"></i> <span class="translatable-text">5. إنهاء الخدمة</span></h3>
+      <p data-ar="يحق للعميل أو للشركة إنهاء الخدمة وفقاً للشروط المتفق عليها في عقد الاشتراك، ومع مراعاة فترة الإشعار اللازمة." data-en="The customer or the company has the right to terminate the service according to the terms agreed upon in the subscription contract, taking into account the necessary notice period.">يحق للعميل أو للشركة إنهاء الخدمة وفقاً للشروط المتفق عليها في عقد الاشتراك، ومع مراعاة فترة الإشعار اللازمة.</p>
+      <h3 data-ar-text="6. تعديل الشروط"><i class="fas fa-edit"></i> <span class="translatable-text">6. تعديل الشروط</span></h3>
+      <p data-ar="تحتفظ TELECOMSY بالحق في تعديل هذه الشروط والأحكام في أي وقت، وسيتم إبلاغ العملاء بأي تغييرات جوهرية." data-en="TELECOMSY reserves the right to modify these terms and conditions at any time, and customers will be informed of any substantial changes.">تحتفظ TELECOMSY بالحق في تعديل هذه الشروط والأحكام في أي وقت، وسيتم إبلاغ العملاء بأي تغييرات جوهرية.</p>
+      <p data-ar="باستخدام خدماتنا، فإنك توافق على الالتزام بهذه الشروط والأحكام." data-en="By using our services, you agree to abide by these terms and conditions.">باستخدام خدماتنا، فإنك توافق على الالتزام بهذه الشروط والأحكام.</p>
+    </div>
+  </div>
+
+
+  <script>
+    // Global variable for current language
+    let currentLang = document.documentElement.getAttribute('lang') || 'ar';
+
+    // Function to create background particles
+    function createParticles() {
+        const container = document.getElementById('bgParticles');
+        const numParticles = 40; // Increased number of particles
+        for (let i = 0; i < numParticles; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = Math.random() * 25 + 15; // Larger particles: 15px to 40px
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * -25}s`; // Start at random points in animation cycle
+            particle.style.animationDuration = `${Math.random() * 15 + 20}s`; // Longer duration: 20s to 35s
+            container.appendChild(particle);
+        }
+    }
+
+    // Function to open a modal
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'flex';
+      // Initialize charts when dashboard modal is opened
+      if (modalId === 'dashboard-modal') {
+        renderCharts();
+      }
+    }
+
+    // Function to close a modal
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    // Function to toggle language
+    function toggleLanguage() {
+      const elements = document.querySelectorAll('[data-ar], [data-en]');
+      const translatableTexts = document.querySelectorAll('.translatable-text');
+      const langToggleBtn = document.getElementById('langToggleBtn');
+      const mainMarquee = document.getElementById('mainMarquee');
+
+
+      currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+      document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+      document.documentElement.setAttribute('lang', currentLang);
+
+      // Set marquee direction based on language
+      if (currentLang === 'ar') {
+        mainMarquee.setAttribute('direction', 'right');
+      } else {
+        mainMarquee.setAttribute('direction', 'left');
+      }
+
+
+      elements.forEach(el => {
+        const arText = el.getAttribute('data-ar');
+        const enText = el.getAttribute('data-en');
+
+        // Handle cases where the element is an input placeholder
+        if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+          el.placeholder = (currentLang === 'ar') ? arText : enText;
+        } else if (el.tagName === 'MARQUEE') {
+          // For marquee, update its innerHTML directly to preserve the tag
+          el.innerHTML = (currentLang === 'ar') ? arText : enText;
+        } else if (arText && enText) {
+          // For elements with direct data-ar/data-en attributes (like titles, paragraphs, buttons)
+          el.textContent = (currentLang === 'ar') ? arText : enText;
+        }
+      });
+
+      // Handle elements with combined content (like <li> with <i> and text)
+      translatableTexts.forEach(span => {
+        const arText = span.parentNode.getAttribute('data-ar-text');
+        const enText = span.parentNode.getAttribute('data-en-text');
+        if (arText && enText) {
+            span.textContent = (currentLang === 'ar') ? arText : enText;
+        }
+      });
+
+
+      langToggleBtn.textContent = (currentLang === 'ar') ? 'English' : 'عربي';
+      
+      // Re-render charts on language change to update labels
+      if (document.getElementById('dashboard-modal').style.display === 'flex') {
+        renderCharts();
+      }
+    }
+
+    // Chart.js - Render charts
+    let speedUsageChartInstance;
+    let cableComparisonChartInstance;
+
+    function renderCharts() {
+      // Destroy existing charts if they exist to prevent duplicates
+      if (speedUsageChartInstance) {
+        speedUsageChartInstance.destroy();
+      }
+      if (cableComparisonChartInstance) {
+        cableComparisonChartInstance.destroy();
+      }
+
+      const speedUsageCtx = document.getElementById('speedUsageChart').getContext('2d');
+      speedUsageChartInstance = new Chart(speedUsageCtx, {
+        type: 'bar',
+        data: {
+          labels: currentLang === 'ar' ? ['2 ميجا', '3 ميجا', '4 ميجا', '6 ميجا', '8 ميجا'] : ['2 Mbps', '3 Mbps', '4 Mbps', '6 Mbps', '8 Mbps'],
+          datasets: [{
+            label: currentLang === 'ar' ? 'الاستخدامات الموصى بها' : 'Recommended Uses',
+            data: [1, 2, 3, 4, 5], // Example data: 1 for basic, 5 for heavy
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.7)',
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 206, 86, 0.7)',
+              'rgba(75, 192, 192, 0.7)',
+              'rgba(153, 102, 255, 0.7)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: 'white',
+                callback: function(value, index, ticks) {
+                  const labels = currentLang === 'ar' ? [
+                    'استخدام أساسي (تصفح، بريد)',
+                    'عائلات صغيرة (تصفح، فيديو SD)',
+                    'استخدام متوسط (بث HD، ألعاب)',
+                    'أداء عالي (عدة مستخدمين، بث 4K)',
+                    'سرعة فائقة (محترفين، ألعاب، بث 4K)'
+                  ] : [
+                    'Basic use (Browse, email)',
+                    'Small families (Browse, SD video)',
+                    'Medium use (HD streaming, gaming)',
+                    'High performance (multiple users, 4K streaming)',
+                    'Super speed (professionals, gaming, 4K streaming)'
+                  ];
+                  return labels[value - 1];
+                }
+              }
+            },
+            x: {
+              ticks: {
+                color: 'white'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'white'
+              }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const labels = currentLang === 'ar' ? [
+                            'استخدام أساسي (تصفح، بريد إلكتروني)',
+                            'عائلات صغيرة (تصفح، فيديو بجودة عادية)',
+                            'استخدام متوسط (بث عالي الدقة، ألعاب)',
+                            'أداء عالي للمنازل (عدة مستخدمين، بث 4K)',
+                            'سرعة فائقة للجميع (محترفين، ألعاب، بث 4K)'
+                        ] : [
+                            'Basic use (Browse, email)',
+                            'Small families (Browse, SD video)',
+                            'Medium use (HD streaming, gaming)',
+                            'High performance for homes (multiple users, 4K streaming)',
+                            'Super speed for everyone (professionals, gaming, 4K streaming)'
+                        ];
+                        return context.dataset.label + ': ' + labels[context.dataIndex];
+                    }
+                }
+            }
+          }
+        }
+      });
+
+      const cableComparisonCtx = document.getElementById('cableComparisonChart').getContext('2d');
+      cableComparisonChartInstance = new Chart(cableComparisonCtx, {
+        type: 'bar', // Changed to bar chart
+        data: {
+          labels: currentLang === 'ar' ? ['المواصفات', 'الجودة', 'السرعة', 'الميزات', 'العيوب'] : ['Specifications', 'Quality', 'Speed', 'Features', 'Drawbacks'],
+          datasets: [
+            {
+              label: currentLang === 'ar' ? 'الكبل الضوئي (FTTH)' : 'Fiber Optic (FTTH)',
+              data: [5, 5, 5, 5, 1], // Scores: 1 (worst) to 5 (best)
+              backgroundColor: 'rgba(75, 192, 192, 0.7)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            },
+            {
+              label: currentLang === 'ar' ? 'الكبل العادي (ADSL)' : 'Regular Cable (ADSL)',
+              data: [3, 3, 2, 3, 4],
+              backgroundColor: 'rgba(255, 99, 132, 0.7)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: 'white',
+                callback: function(value, index, ticks) {
+                    const labels = currentLang === 'ar' ? [
+                        '', // 0 is not used in data
+                        'ضعيف جداً', // 1
+                        'متوسط',     // 2
+                        'جيد',       // 3
+                        'جيد جداً',  // 4
+                        'ممتاز'      // 5
+                    ] : [
+                        '', // 0 is not used in data
+                        'Very Poor', // 1
+                        'Average',   // 2
+                        'Good',      // 3
+                        'Very Good', // 4
+                        'Excellent'  // 5
+                    ];
+                    return labels[value] || '';
+                }
+              }
+            },
+            x: {
+              ticks: {
+                color: 'white'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'white'
+              }
+            },
+            tooltip: {
+                callbacks: {
+                    title: function(context) {
+                        return context[0].label;
+                    },
+                    label: function(context) {
+                        const score = context.raw;
+                        const attribute = context.label;
+                        let description = '';
+
+                        if (currentLang === 'ar') {
+                            if (attribute === 'المواصفات') {
+                                description = (score === 5 ? 'مواصفات عالية جداً (FTTH) ' : 'مواصفات قياسية (ADSL)');
+                            } else if (attribute === 'الجودة') {
+                                description = (score === 5 ? 'جودة اتصال فائقة بدون تشويش' : 'جودة متأثرة بالبعد عن المقسم');
+                            } else if (attribute === 'السرعة') {
+                                description = (score === 5 ? 'سرعات تصل لعدة جيجا بايت' : 'سرعات تصل لـ 24 ميجا كحد أقصى');
+                            } else if (attribute === 'الميزات') {
+                                description = (score === 5 ? 'ثبات، أمان، استقرار، لا يتأثر بالرطوبة' : 'سهولة التركيب، تكلفة أقل');
+                            } else if (attribute === 'العيوب') {
+                                description = (score === 1 ? 'تكلفة تركيب أعلى، محدودية الانتشار' : 'تأثر بالمسافة، تشويش، أقل سرعة');
+                            }
+                            return `${context.dataset.label}: ${description}`;
+                        } else { // English
+                            if (attribute === 'Specifications') {
+                                description = (score === 5 ? 'Very high specifications (FTTH)' : 'Standard specifications (ADSL)');
+                            }
+                            else if (attribute === 'Quality') {
+                                description = (score === 5 ? 'Superior connection quality without interference' : 'Quality affected by distance from exchange');
+                            }
+                            else if (attribute === 'Speed') {
+                                description = (score === 5 ? 'Speeds up to several gigabytes' : 'Speeds up to 24 Mbps maximum');
+                            }
+                            else if (attribute === 'Features') {
+                                description = (score === 5 ? 'Stability, security, reliability, unaffected by humidity' : 'Easy installation, lower cost');
+                            }
+                            else if (attribute === 'Drawbacks') {
+                                description = (score === 1 ? 'Higher installation cost, limited availability' : 'Affected by distance, interference, lower speed');
+                            }
+                            return `${context.dataset.label}: ${description}`;
+                        }
+                    }
+                }
+            }
+          }
+        }
+      });
+    }
+
+
+    // Event listeners for navigation buttons to open modals
+    document.querySelectorAll('.nav-button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetModalId = this.getAttribute('href').substring(1);
+        openModal(targetModalId);
+      });
+
+      // Add ripple effect on click
+      button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        this.appendChild(ripple);
+
+        const diameter = Math.max(this.clientWidth, this.clientHeight);
+        const radius = diameter / 2;
+
+        // Position the ripple where the click occurred
+        ripple.style.width = ripple.style.height = `${diameter}px`;
+        ripple.style.left = `${e.clientX - this.getBoundingClientRect().left - radius}px`;
+        ripple.style.top = `${e.clientY - this.getBoundingClientRect().top - radius}px`;
+
+        // Remove the ripple element after animation
+        ripple.addEventListener('animationend', () => {
+          ripple.remove();
+        });
+      });
+    });
+
+    // Language toggle button event listener
+    document.getElementById('langToggleBtn').addEventListener('click', toggleLanguage);
+
+
+    // Run particles and button load animation on page load
+    window.addEventListener('load', () => {
+      createParticles();
+      // Ensure initial language is set correctly based on HTML dir
+      currentLang = document.documentElement.getAttribute('lang') || 'ar';
+      document.getElementById('langToggleBtn').textContent = (currentLang === 'ar') ? 'English' : 'عربي';
+
+      // Set initial marquee direction
+      const mainMarquee = document.getElementById('mainMarquee');
+      if (currentLang === 'ar') {
+        mainMarquee.setAttribute('direction', 'right');
+      } else {
+        mainMarquee.setAttribute('direction', 'left');
+      }
+
+
+      // Fade-in and slide-up animation for buttons
+      const buttons = document.querySelectorAll('.nav-button');
+      buttons.forEach((button, index) => {
+        button.style.opacity = '0';
+        button.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+          button.style.transition = 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
+          button.style.opacity = '1';
+          button.style.transform = 'translateY(0)';
+        }, index * 100);
+      });
+    });
+
+    // Handle closing modals by clicking outside (optional, but good UX)
+    window.addEventListener('click', function(event) {
+      document.querySelectorAll('.modal').forEach(modal => {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (modal.style.display === 'flex') {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    });
+
+  </script>
+
+</body>
+</html>
